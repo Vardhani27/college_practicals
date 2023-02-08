@@ -1,0 +1,21 @@
+import java.util.*;
+public class a{
+    public static void main(String[] args) 
+    {
+        ArrayList<String> l = new ArrayList<String>();
+        
+        l.add("A");
+        l.add("10");
+        l.add("A");
+        l.add(null);
+        System.out.println("List made is " +l);
+        System.out.println();
+        l.remove(2);
+        System.out.println("New List is " +l);
+
+        l.add(2, "H");
+        l.add("N");
+        System.out.println();        
+        System.out.println("New List is " +l);
+    }
+}
