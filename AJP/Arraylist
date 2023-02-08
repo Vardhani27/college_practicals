@@ -6,14 +6,18 @@ public class a{
         ArrayList<String> l = new ArrayList<String>();
         l.add("abc");
         l.add("def");
-        
-      
-
         System.out.println("List made is " +l);
         System.out.println();
+        
         l.add("123");
         l.add(2, "456");
         System.out.println("New List is " +l);
+        System.out.println();
+        
         System.out.println("element at zero index is " +l.get(0));
+        System.out.println();
+        
+        l.remove(3);
+        System.out.println("New List is " +l);
     }
 }
