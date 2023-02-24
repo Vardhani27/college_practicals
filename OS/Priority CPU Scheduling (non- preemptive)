@@ -1,0 +1,123 @@
+//Priority (non-preemptive) CPU scheduling
+
+#include <iostream>
+using namespace std;
+
+struct Time
+{
+    int arrival;
+    int burst;
+    int priority;
+};
+
+int main()
+{
+    struct Time t[20], temp;
+    int i,j,size;
+    int gantt[20] , rt[20], wt[20], tat[20] ;
+    
+    
+    //inputting size of table
+    cout<<"Enter the number of entries you want to make (max 20) : ";
+    cin>>size;
+    
+    
+    //inputting values
+    cout<<"Enter time : \n";
+    for(i=0; i<size; i++)
+    {
+        cout<<"\tArrival Time : ";
+        cin>>t[i].arrival;
+        cout<<"\tCPU Burst Time : ";
+        cin>>t[i].burst;
+        cout<<"\tPriority of the process : ";
+        cin>>t[i].priority;
+        cout<<endl;
+    }
+    cout<<endl;
+    
+    
+    // sorting the table according to arrival time
+    for(i= 0 ; i<(size-1) ; i++)
+    {
+        for(j=(i+1); j<size; j++)
+        { 
+            if(t[i].priority < t[j].priority)
+            {
+                temp = t[i];
+                t[i] = t[j];
+                t[j] = temp;
+            }
+        }
+    }
+    cout<<"Sorting... \n"; 
+    cout<<"\t\tProcess Name \t\t\tPriority \t\t\tCPU Burst \t\t\tArrival Time \n";
+    for(i=0; i<size; i++)
+    {
+        cout<<"\t\tP"<<(i+1) <<"\t\t\t"<< t[i].priority <<"\t\t\t"<< t[i].burst<<"\t\t\t "<<t[i].arrival <<endl;
+    }
+    cout<<endl;
+    
+    
+    //gantt chart
+    gantt[0] = t[0].arrival;
+    for(i=0 ; i<size; i++)
+    {
+        gantt[i+1] = t[i].burst + gantt[i];
+    }
+    cout<<"Gantt chart : \n";
+    {
+        for(i=0; i<size+1; i++)
+        {
+            cout<< gantt[i] <<"\t"; 
+        }
+        cout<<endl;
+    }
+    
+    
+    //response time
+    for(i=0 ; i<size; i++)
+    {
+        rt[i] = gantt[i] - t[i].arrival ;
+    }
+    cout<<"Response time : \n";
+    {
+        for(i=0; i<size; i++)
+        {
+            cout<< rt[i] <<"\t"; 
+        }
+        cout<<endl;
+    }
+    
+    
+    //waiting time
+    for(i=0 ; i<size; i++)
+    {
+        wt[i] = gantt[i] - t[i].arrival ;
+    }
+    cout<<"waiting time : \n";
+    {
+        for(i=0; i<size; i++)
+        {
+            cout<< rt[i] <<"\t"; 
+        }
+        cout<<endl;
+    }
+    
+    
+    //turn around time
+    for(i=0 ; i<size; i++)
+    {
+        tat[i] = gantt[i+1] - t[i].arrival ;
+    }
+    cout<<"Turn around time : \n";
+    {
+        for(i=0; i<size; i++)
+        {
+            cout<< tat[i] <<"\t"; 
+        }
+        cout<<endl;
+    }
+
+    return 0;
+}     
