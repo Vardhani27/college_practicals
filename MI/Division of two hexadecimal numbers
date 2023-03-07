@@ -1,0 +1,14 @@
+;<DIVISION OF TWO HEXADECIMAL NUMBERS USING 8085(repetitive subrtaction)>
+
+MVI A, 07H
+MVI B, 02H
+MVI C, 00H ;<Counts the number of times subtraction occurs/ quotient>
+LOOP: CMP B
+JC RESULT
+SUB B
+INR C
+JMP LOOP
+RESULT: STA 0001H ;<REMAINDER>
+MOV A,C
+STA 0000H ;<QUOTIENT>
+HLT
