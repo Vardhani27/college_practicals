@@ -1,0 +1,15 @@
+;<To find the largest number from an array using 8085 >
+
+LXI H, 4200H ;<array size>
+MOV B, M 
+INX H
+MOV A,M
+DCR B
+LOOP:INX H
+CMP M
+JNC AHEAD
+MOV A,M
+AHEAD: DCR B
+JNC LOOP
+STA 4212H
+HLT
