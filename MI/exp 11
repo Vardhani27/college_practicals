@@ -1,0 +1,12 @@
+;<Trannfer block of data bytes from one memory location to another>
+
+MVI C, 02H
+LXI H, 2200H
+LXI D, 2210H
+BACK: MOV A,M
+STAX D
+INX H
+INX D
+DCR C
+JNZ BACK
+HLT
