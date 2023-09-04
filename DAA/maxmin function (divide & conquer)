@@ -1,0 +1,82 @@
+#include <iostream>
+using namespace std;
+
+int max2, min2; 
+int a[100];
+
+void maxmin(int i, int j)
+{
+    int max1, min1, mid;
+    
+        //case1
+    if(i==j)
+    {
+        max2 = min2 = a[i];
+    }
+    else
+    {
+        //case2 
+        if(i == (j-1))
+        {
+            if(a[i]<a[j])
+            {
+                max2= a[j];
+                min2= a[i];
+            }
+            else
+            {
+                max2= a[i];
+                min2= a[j];
+            }
+        }
+        else
+        {
+            //case3
+            mid = ((i+j)/2);
+            maxmin(i, mid);
+            max1= max2, min1 = min2;
+            maxmin(mid+1, j);
+            
+            if(max1>max2)
+            {
+                max2=max1;
+            }
+            if(min1<min2)
+            {
+                min2 = min1;
+            }
+        }
+    }
+}
+
+int main()
+{
+    int size, i ;
+    cout<<"Enter the size of array : ";
+    cin>>size;
+    
+    
+    cout<<"Enter " << size<< " elements in the array :";
+    for(i = 0; i<size; i++)
+    {
+        cin>>a[i];
+     
+    }
+    
+    cout<<"Entered elements are :";
+    for(i = 0; i<size; i++)
+    {
+        cout<<a[i]<< "   ";
+    }
+    cout<<endl;
+    //max2 = a[0];
+    //min2 = a[0];
+    
+    maxmin(0,size-1);
+    
+    cout<< "Maximum is "<< max2<<endl;
+    cout<< "minimum is "<< min2<<endl ; 
+    
+
+    return 0;
+}
