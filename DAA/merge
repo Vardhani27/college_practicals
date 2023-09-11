@@ -1,0 +1,91 @@
+#include <iostream>
+using namespace std;
+
+//int low, mid, high;
+int a[100], b[100];
+
+//merge
+void merge(int low, int mid, int high)
+{
+    //h for previous array, i for new array
+    int h = low, i = low, j= mid+1;
+    while(h<=mid && j<=high)
+    {
+        if( a[h]<=a[j])
+        {
+            b[i]= a[h];
+            h++;
+        }
+        else
+        {
+            b[i]=a[j];
+            j++;
+        }
+        i++;
+    }
+    if (h>mid)
+    {
+        for(int k=j; k<=high; k++)
+        {
+            b[i]= a[k];
+            j++;
+        }
+    }
+    if (j>high)
+    {
+        for(int k=i; k<=mid; k++)
+        {
+            b[i]= a[k];
+            h++;
+        }
+    }
+    
+    for(i=low; i=high; i++)
+    {
+        a[i]=b[i];
+    }
+    
+    
+}
+
+void mergesort(int low,int high)
+{
+    //divide
+    if(low<high)
+    {
+        int mid= (low+high)/2;
+        mergesort(low,mid);
+        mergesort((mid+1), high);
+        merge(low, mid,high);
+    }
+    
+}
+
+int main()
+{
+    int size, i;
+    int high = size, low = 0;
+    
+    cout<<"Enter size of the array : ";
+    cin>>size;
+    cout<<"Enter elements in the array : ";
+    for(i=0; i<size; i++)
+    {
+       cin>>a[i];
+    }
+    
+    cout<<"Unordered array : ";
+    for(i=0; i<size; i++)
+    {
+       cout<<a[i];
+    }
+    
+    
+     mergesort(low, high);
+    cout<<"Sorted array is : ";
+    for(i=0; i<size; i++)
+    {
+       cout<<a[i];
+    }
+    return 0;
+}
